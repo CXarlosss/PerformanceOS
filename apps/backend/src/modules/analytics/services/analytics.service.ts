@@ -71,14 +71,22 @@ export class AnalyticsService {
       include: {
         sets: {
           include: {
-            assignedExercise: true,
+            assignedExercise: {
+              include: {
+                exercise: true,
+              },
+            },
           },
         },
         assignedSession: {
           include: {
             blocks: {
               include: {
-                exercises: true,
+                exercises: {
+                  include: {
+                    exercise: true,
+                  },
+                },
               },
             },
           },
@@ -104,7 +112,9 @@ export class AnalyticsService {
     });
 
     const weeklyMetrics: any[] = [];
-    const sortedWeeks = Array.from(weeksMap.keys()).sort((a, b) => a - b);
+    const sortedWeeks = Array.from(weeksMap.keys()).sort(
+      (a: number, b: number) => a - b,
+    );
 
     let prevVolume = 0;
     let prevFatigue = 0;
@@ -113,16 +123,17 @@ export class AnalyticsService {
       const weekSessions = weeksMap.get(weekNum) || [];
       const volume = this.volumeAggregator(weekSessions);
       const fatigue = weekSessions.reduce(
-        (total, s) =>
+        (total: number, s: any) =>
           total +
           s.sets.reduce(
-            (st: any, set: any) => st + set.load * set.reps * (set.rpe / 10),
+            (st: number, set: any) => st + set.load * set.reps * (set.rpe / 10),
             0,
           ),
         0,
       );
       const prs = weekSessions.reduce(
-        (total, s) => total + s.sets.filter((set: any) => set.isPR).length,
+        (total: number, s: any) =>
+          total + s.sets.filter((set: any) => set.isPR).length,
         0,
       );
 
@@ -149,8 +160,8 @@ export class AnalyticsService {
     // Exercise Progress
     const exerciseProgress: Record<string, any[]> = {};
     sessions.forEach((s) => {
-      s.sets.forEach((set) => {
-        const exerciseName = set.assignedExercise.exerciseName;
+      s.sets.forEach((set: any) => {
+        const exerciseName = set.assignedExercise.exercise.name;
 
         if (!exerciseProgress[exerciseName])
           exerciseProgress[exerciseName] = [];
@@ -184,10 +195,10 @@ export class AnalyticsService {
   }
 
   private volumeAggregator(sessions: any[]): number {
-    return sessions.reduce((total, s) => {
+    return sessions.reduce((total: number, s: any) => {
       return (
         total +
-        s.sets.reduce((st: any, set: any) => st + set.load * set.reps, 0)
+        s.sets.reduce((st: number, set: any) => st + set.load * set.reps, 0)
       );
     }, 0);
   }

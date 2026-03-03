@@ -95,11 +95,13 @@ export class InsightsService {
 
     const maxVolume = Math.max(...volumes);
     const minVolume = Math.min(...volumes);
-    const avgVolume = volumes.reduce((a, b) => a + b, 0) / volumes.length;
+    const avgVolume =
+      volumes.reduce((a: number, b: number) => a + b, 0) / volumes.length;
 
     const maxScore = Math.max(...scores);
     const minScore = Math.min(...scores);
-    const avgScore = scores.reduce((a, b) => a + b, 0) / scores.length;
+    const avgScore =
+      scores.reduce((a: number, b: number) => a + b, 0) / scores.length;
 
     const prCount = await this.prisma.workoutSet.count({
       where: {
