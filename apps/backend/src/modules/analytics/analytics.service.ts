@@ -56,8 +56,10 @@ export class AnalyticsService {
 
     const avgPerformanceScore =
       recentWorkouts.length > 0
-        ? recentWorkouts.reduce((acc, w) => acc + (w.sessionScore ?? 0), 0) /
-          recentWorkouts.length
+        ? recentWorkouts.reduce(
+            (acc: number, w: any) => acc + (w.sessionScore ?? 0),
+            0,
+          ) / recentWorkouts.length
         : 0;
 
     const latestWorkout =

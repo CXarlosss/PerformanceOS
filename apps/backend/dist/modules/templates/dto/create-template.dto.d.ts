@@ -1,5 +1,5 @@
 declare class TemplateExerciseDto {
-    name: string;
+    exerciseId: string;
     targetSets: number;
     targetReps: number;
     targetRpe: number;

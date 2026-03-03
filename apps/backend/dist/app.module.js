@@ -9,6 +9,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
+const throttler_1 = require("@nestjs/throttler");
+const core_1 = require("@nestjs/core");
 const prisma_service_1 = require("./prisma/prisma.service");
 const auth_module_1 = require("./modules/auth/auth.module");
 const workouts_module_1 = require("./modules/workouts/workouts.module");
@@ -16,6 +18,8 @@ const analytics_module_1 = require("./modules/analytics/analytics.module");
 const programs_module_1 = require("./modules/programs/programs.module");
 const templates_module_1 = require("./modules/templates/templates.module");
 const athletes_module_1 = require("./modules/athletes/athletes.module");
+const metrics_module_1 = require("./modules/metrics/metrics.module");
+const insights_module_1 = require("./modules/insights/insights.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -23,15 +27,29 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             config_1.ConfigModule.forRoot({ isGlobal: true }),
+            throttler_1.ThrottlerModule.forRoot([
+                {
+                    ttl: 60000,
+                    limit: 60,
+                },
+            ]),
             auth_module_1.AuthModule,
             workouts_module_1.WorkoutsModule,
             analytics_module_1.AnalyticsModule,
             programs_module_1.ProgramsModule,
             templates_module_1.TemplatesModule,
             athletes_module_1.AthletesModule,
+            metrics_module_1.MetricsModule,
+            insights_module_1.InsightsModule,
         ],
         controllers: [],
-        providers: [prisma_service_1.PrismaService],
+        providers: [
+            prisma_service_1.PrismaService,
+            {
+                provide: core_1.APP_GUARD,
+                useClass: throttler_1.ThrottlerGuard,
+            },
+        ],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

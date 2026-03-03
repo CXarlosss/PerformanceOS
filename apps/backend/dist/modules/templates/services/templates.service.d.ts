@@ -8,6 +8,8 @@ export declare class TemplatesService {
         name: string;
         description: string | null;
         durationWeeks: number;
+        createdAt: Date;
+        updatedAt: Date;
         createdById: string;
     }>;
     getAll(): Promise<({
@@ -19,78 +21,108 @@ export declare class TemplatesService {
         name: string;
         description: string | null;
         durationWeeks: number;
+        createdAt: Date;
+        updatedAt: Date;
         createdById: string;
     })[]>;
     findAll(): Promise<({
         microcycles: ({
             sessions: ({
                 blocks: ({
-                    exercises: {
+                    exercises: ({
+                        exercise: {
+                            id: string;
+                            name: string;
+                            createdAt: Date;
+                            category: string | null;
+                            muscleGroup: string | null;
+                            isCompound: boolean;
+                        };
+                    } & {
                         id: string;
-                        blockId: string;
-                        exerciseName: string;
+                        order: number;
                         targetSets: number;
                         targetReps: number;
                         targetRpe: number;
-                    }[];
+                        exerciseId: string;
+                        blockId: string;
+                    })[];
                 } & {
                     id: string;
-                    sessionId: string;
-                    type: string;
                     order: number;
+                    type: string;
+                    sessionId: string;
                 })[];
             } & {
                 id: string;
-                microcycleId: string;
+                order: number;
                 dayNumber: number;
                 title: string;
+                microcycleId: string;
             })[];
         } & {
             id: string;
-            templateId: string;
             weekNumber: number;
+            order: number;
+            templateId: string;
         })[];
     } & {
         id: string;
         name: string;
         description: string | null;
         durationWeeks: number;
+        createdAt: Date;
+        updatedAt: Date;
         createdById: string;
     })[]>;
     findOne(id: string): Promise<{
         microcycles: ({
             sessions: ({
                 blocks: ({
-                    exercises: {
+                    exercises: ({
+                        exercise: {
+                            id: string;
+                            name: string;
+                            createdAt: Date;
+                            category: string | null;
+                            muscleGroup: string | null;
+                            isCompound: boolean;
+                        };
+                    } & {
                         id: string;
-                        blockId: string;
-                        exerciseName: string;
+                        order: number;
                         targetSets: number;
                         targetReps: number;
                         targetRpe: number;
-                    }[];
+                        exerciseId: string;
+                        blockId: string;
+                    })[];
                 } & {
                     id: string;
-                    sessionId: string;
-                    type: string;
                     order: number;
+                    type: string;
+                    sessionId: string;
                 })[];
             } & {
                 id: string;
-                microcycleId: string;
+                order: number;
                 dayNumber: number;
                 title: string;
+                microcycleId: string;
             })[];
         } & {
             id: string;
-            templateId: string;
             weekNumber: number;
+            order: number;
+            templateId: string;
         })[];
     } & {
         id: string;
         name: string;
         description: string | null;
         durationWeeks: number;
+        createdAt: Date;
+        updatedAt: Date;
         createdById: string;
     }>;
 }

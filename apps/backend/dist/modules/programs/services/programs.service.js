@@ -51,6 +51,7 @@ let ProgramsService = class ProgramsService {
                 data: {
                     assignedProgramId: assignedProgram.id,
                     weekNumber: micro.weekNumber,
+                    order: micro.order,
                 },
             });
             for (const session of micro.sessions) {
@@ -59,6 +60,7 @@ let ProgramsService = class ProgramsService {
                         microcycleId: assignedMicro.id,
                         dayNumber: session.dayNumber,
                         title: session.title,
+                        order: session.order,
                     },
                 });
                 for (const block of session.blocks) {
@@ -73,10 +75,11 @@ let ProgramsService = class ProgramsService {
                         await this.prisma.assignedExercise.create({
                             data: {
                                 blockId: assignedBlock.id,
-                                exerciseName: ex.exerciseName,
+                                exerciseId: ex.exerciseId,
                                 targetSets: ex.targetSets,
                                 targetReps: ex.targetReps,
                                 targetRpe: ex.targetRpe,
+                                order: ex.order,
                             },
                         });
                     }
@@ -98,12 +101,20 @@ let ProgramsService = class ProgramsService {
             },
             include: {
                 microcycles: {
+                    orderBy: { order: "asc" },
                     include: {
                         sessions: {
+                            orderBy: { order: "asc" },
                             include: {
                                 blocks: {
+                                    orderBy: { order: "asc" },
                                     include: {
-                                        exercises: true,
+                                        exercises: {
+                                            orderBy: { order: "asc" },
+                                            include: {
+                                                exercise: true,
+                                            },
+                                        },
                                     },
                                 },
                             },

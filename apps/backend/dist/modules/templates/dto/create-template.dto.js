@@ -15,9 +15,9 @@ const class_transformer_1 = require("class-transformer");
 class TemplateExerciseDto {
 }
 __decorate([
-    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsUUID)(),
     __metadata("design:type", String)
-], TemplateExerciseDto.prototype, "name", void 0);
+], TemplateExerciseDto.prototype, "exerciseId", void 0);
 __decorate([
     (0, class_validator_1.IsInt)(),
     (0, class_validator_1.Min)(1),

@@ -11,8 +11,8 @@ import {
 import { Type } from "class-transformer";
 
 class TemplateExerciseDto {
-  @IsString()
-  name!: string;
+  @IsUUID()
+  exerciseId!: string;
 
   @IsInt()
   @Min(1)

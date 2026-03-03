@@ -11,15 +11,16 @@ const common_1 = require("@nestjs/common");
 const workouts_service_1 = require("./services/workouts.service");
 const workouts_controller_1 = require("./controllers/workouts.controller");
 const prisma_service_1 = require("../../prisma/prisma.service");
+const metrics_module_1 = require("../metrics/metrics.module");
 let WorkoutsModule = class WorkoutsModule {
 };
 exports.WorkoutsModule = WorkoutsModule;
 exports.WorkoutsModule = WorkoutsModule = __decorate([
     (0, common_1.Module)({
-        imports: [],
+        imports: [metrics_module_1.MetricsModule],
         providers: [workouts_service_1.WorkoutsService, prisma_service_1.PrismaService],
         controllers: [workouts_controller_1.WorkoutsController],
-        exports: [workouts_service_1.WorkoutsService]
+        exports: [workouts_service_1.WorkoutsService],
     })
 ], WorkoutsModule);
 //# sourceMappingURL=workouts.module.js.map

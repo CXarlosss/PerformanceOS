@@ -15,17 +15,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WorkoutsController = void 0;
 const common_1 = require("@nestjs/common");
 const workouts_service_1 = require("../services/workouts.service");
+const metrics_service_1 = require("../../metrics/services/metrics.service");
 const create_workout_set_dto_1 = require("../dto/create-workout-set.dto");
 const jwt_auth_guard_1 = require("../../auth/guards/jwt-auth.guard");
 let WorkoutsController = class WorkoutsController {
-    constructor(workoutsService) {
+    constructor(workoutsService, metricsService) {
         this.workoutsService = workoutsService;
+        this.metricsService = metricsService;
     }
     async registerSet(sessionId, dto, req) {
         return this.workoutsService.registerSet(sessionId, dto, req.user.userId);
     }
     async getMyWorkouts(req) {
         return this.workoutsService.getSessionsForAthlete(req.user.userId);
+    }
+    async completeWorkout(id) {
+        return this.metricsService.completeWorkout(id);
     }
 };
 exports.WorkoutsController = WorkoutsController;
@@ -45,9 +50,17 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], WorkoutsController.prototype, "getMyWorkouts", null);
+__decorate([
+    (0, common_1.Patch)(":id/complete"),
+    __param(0, (0, common_1.Param)("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], WorkoutsController.prototype, "completeWorkout", null);
 exports.WorkoutsController = WorkoutsController = __decorate([
     (0, common_1.Controller)("workouts"),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    __metadata("design:paramtypes", [workouts_service_1.WorkoutsService])
+    __metadata("design:paramtypes", [workouts_service_1.WorkoutsService,
+        metrics_service_1.MetricsService])
 ], WorkoutsController);
 //# sourceMappingURL=workouts.controller.js.map

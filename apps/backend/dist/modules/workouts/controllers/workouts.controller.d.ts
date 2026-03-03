@@ -1,11 +1,14 @@
 import { WorkoutsService } from "../services/workouts.service";
+import { MetricsService } from "../../metrics/services/metrics.service";
 import { CreateWorkoutSetDto } from "../dto/create-workout-set.dto";
 export declare class WorkoutsController {
     private workoutsService;
-    constructor(workoutsService: WorkoutsService);
+    private metricsService;
+    constructor(workoutsService: WorkoutsService, metricsService: MetricsService);
     registerSet(sessionId: string, dto: CreateWorkoutSetDto, req: any): Promise<{
         set: {
             id: string;
+            createdAt: Date;
             setNumber: number;
             reps: number;
             load: number;
@@ -26,25 +29,27 @@ export declare class WorkoutsController {
                 exercises: {
                     id: string;
                     blockId: string;
-                    exerciseName: string;
+                    exerciseId: string;
                     targetSets: number;
                     targetReps: number;
                     targetRpe: number;
                 }[];
             } & {
                 id: string;
+                order: number;
                 sessionId: string;
                 type: string;
-                order: number;
             })[];
         } & {
             id: string;
             microcycleId: string;
             dayNumber: number;
+            order: number;
             title: string;
         };
         sets: {
             id: string;
+            createdAt: Date;
             setNumber: number;
             reps: number;
             load: number;
@@ -59,5 +64,30 @@ export declare class WorkoutsController {
         assignedSessionId: string;
         date: Date;
         status: import(".prisma/client").$Enums.SessionStatus;
+        sessionVolume: number | null;
+        sessionFatigue: number | null;
+        sessionScore: number | null;
+        overloadFlag: boolean | null;
+        acwr: number | null;
+        riskLevel: string | null;
+        fatigueModelVersion: number | null;
+        completedAt: Date | null;
+        createdAt: Date;
     })[]>;
+    completeWorkout(id: string): Promise<{
+        id: string;
+        assignedProgramId: string;
+        assignedSessionId: string;
+        date: Date;
+        status: import(".prisma/client").$Enums.SessionStatus;
+        sessionVolume: number | null;
+        sessionFatigue: number | null;
+        sessionScore: number | null;
+        overloadFlag: boolean | null;
+        acwr: number | null;
+        riskLevel: string | null;
+        fatigueModelVersion: number | null;
+        completedAt: Date | null;
+        createdAt: Date;
+    }>;
 }

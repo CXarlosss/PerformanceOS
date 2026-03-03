@@ -14,22 +14,27 @@ export class TemplatesService {
         durationWeeks: dto.durationWeeks,
         createdById: userId,
         microcycles: {
-          create: dto.microcycles.map((m, index) => ({
-            weekNumber: index + 1,
+          create: dto.microcycles.map((m, microIndex) => ({
+            weekNumber: microIndex + 1,
+            order: microIndex + 1,
             sessions: {
               create: m.sessions.map((s, sessionIndex) => ({
                 dayNumber: sessionIndex + 1,
+                order: sessionIndex + 1,
                 title: s.title,
                 blocks: {
                   create: s.blocks.map((b, blockIndex) => ({
                     type: b.type,
                     order: blockIndex + 1,
                     exercises: {
-                      create: b.exercises.map((e) => ({
-                        exerciseName: e.name,
+                      create: b.exercises.map((e, exerciseIndex) => ({
+                        exercise: {
+                          connect: { id: e.exerciseId },
+                        },
                         targetSets: e.targetSets,
                         targetReps: e.targetReps,
                         targetRpe: e.targetRpe,
+                        order: exerciseIndex + 1,
                       })),
                     },
                   })),
@@ -53,6 +58,7 @@ export class TemplatesService {
       },
     });
   }
+
   async findAll() {
     return this.prisma.programTemplate.findMany({
       include: {
@@ -62,7 +68,11 @@ export class TemplatesService {
               include: {
                 blocks: {
                   include: {
-                    exercises: true,
+                    exercises: {
+                      include: {
+                        exercise: true,
+                      },
+                    },
                   },
                 },
               },
@@ -83,7 +93,11 @@ export class TemplatesService {
               include: {
                 blocks: {
                   include: {
-                    exercises: true,
+                    exercises: {
+                      include: {
+                        exercise: true,
+                      },
+                    },
                   },
                 },
               },

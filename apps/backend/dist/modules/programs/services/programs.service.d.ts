@@ -6,51 +6,26 @@ export declare class ProgramsService {
     constructor(prisma: PrismaService);
     assign(dto: AssignProgramDto): Promise<{
         id: string;
+        startDate: Date;
         status: import(".prisma/client").$Enums.ProgramStatus;
+        createdAt: Date;
+        updatedAt: Date;
         templateId: string;
         athleteId: string;
-        startDate: Date;
     }>;
-    getCurrentProgram(userId: string): Promise<({
-        microcycles: ({
-            sessions: ({
-                blocks: ({
-                    exercises: {
-                        id: string;
-                        blockId: string;
-                        exerciseName: string;
-                        targetSets: number;
-                        targetReps: number;
-                        targetRpe: number;
-                    }[];
-                } & {
-                    id: string;
-                    sessionId: string;
-                    type: string;
-                    order: number;
-                })[];
-            } & {
-                id: string;
-                microcycleId: string;
-                dayNumber: number;
-                title: string;
-            })[];
-        } & {
-            id: string;
-            assignedProgramId: string;
-            weekNumber: number;
-        })[];
-    } & {
+    getCurrentProgram(userId: string): Promise<{
         id: string;
+        startDate: Date;
         status: import(".prisma/client").$Enums.ProgramStatus;
+        createdAt: Date;
+        updatedAt: Date;
         templateId: string;
         athleteId: string;
-        startDate: Date;
-    }) | null>;
+    } | null>;
     updateAssignedExercise(exerciseId: string, dto: UpdateAssignedExerciseDto, coachUserId: string): Promise<{
         id: string;
         blockId: string;
-        exerciseName: string;
+        exerciseId: string;
         targetSets: number;
         targetReps: number;
         targetRpe: number;

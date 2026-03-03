@@ -5,22 +5,26 @@ export declare class AthletesService {
     findAll(): Promise<({
         coach: {
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             email: string;
             passwordHash: string;
             role: import(".prisma/client").$Enums.Role;
-            createdAt: Date;
         } | null;
         assignedPrograms: {
             id: string;
             status: import(".prisma/client").$Enums.ProgramStatus;
+            createdAt: Date;
             templateId: string;
             athleteId: string;
             startDate: Date;
+            updatedAt: Date;
         }[];
     } & {
+        name: string;
         id: string;
         createdAt: Date;
-        name: string;
+        updatedAt: Date;
         userId: string;
         level: string;
         coachId: string | null;
@@ -33,39 +37,44 @@ export declare class AthletesService {
                         exercises: {
                             id: string;
                             blockId: string;
-                            exerciseName: string;
+                            exerciseId: string;
                             targetSets: number;
                             targetReps: number;
                             targetRpe: number;
                         }[];
                     } & {
                         id: string;
+                        order: number;
                         sessionId: string;
                         type: string;
-                        order: number;
                     })[];
                 } & {
                     id: string;
                     microcycleId: string;
                     dayNumber: number;
+                    order: number;
                     title: string;
                 })[];
             } & {
                 id: string;
                 assignedProgramId: string;
+                order: number;
                 weekNumber: number;
             })[];
         } & {
             id: string;
             status: import(".prisma/client").$Enums.ProgramStatus;
+            createdAt: Date;
             templateId: string;
             athleteId: string;
             startDate: Date;
+            updatedAt: Date;
         })[];
     } & {
+        name: string;
         id: string;
         createdAt: Date;
-        name: string;
+        updatedAt: Date;
         userId: string;
         level: string;
         coachId: string | null;
