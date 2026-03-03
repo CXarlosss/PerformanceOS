@@ -1,18 +1,18 @@
-import { PrismaClient, Role } from '@prisma/client';
-import * as bcrypt from 'bcrypt';
+import { PrismaClient, Role } from "@prisma/client";
+import * as bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
 async function main() {
-  const adminEmail = 'admin@performanceos.com';
-  const adminPassword = 'Admin123!';
+  const adminEmail = "admin@performanceos.com";
+  const adminPassword = process.env.SEED_ADMIN_PASSWORD || "Admin123!";
 
   const existingAdmin = await prisma.user.findUnique({
-    where: { email: adminEmail }
+    where: { email: adminEmail },
   });
 
   if (existingAdmin) {
-    console.log('✅ Admin already exists');
+    console.log("✅ Admin already exists");
     return;
   }
 
@@ -22,13 +22,12 @@ async function main() {
     data: {
       email: adminEmail,
       passwordHash: hashedPassword,
-      role: Role.ADMIN
-    }
+      role: Role.ADMIN,
+    },
   });
 
-  console.log('🚀 Admin user created successfully');
-  console.log('Email:', adminEmail);
-  console.log('Password:', adminPassword);
+  console.log("🚀 Admin user created successfully");
+  console.log("Email:", adminEmail);
 }
 
 main()
