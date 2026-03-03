@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../../../prisma/prisma.service";
+import { WorkoutSet } from "@prisma/client";
 
 @Injectable()
 export class PRService {
@@ -31,7 +32,9 @@ export class PRService {
     if (!previousSets.length) return true;
 
     const maxHistorical1RM = Math.max(
-      ...previousSets.map((set) => this.estimate1RM(set.load, set.reps)),
+      ...previousSets.map((set: Pick<WorkoutSet, "load" | "reps">) =>
+        this.estimate1RM(set.load, set.reps),
+      ),
     );
 
     return current1RM > maxHistorical1RM;

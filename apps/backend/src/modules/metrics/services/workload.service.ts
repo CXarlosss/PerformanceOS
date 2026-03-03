@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../../../prisma/prisma.service";
+import { Prisma, WorkoutSession } from "@prisma/client";
 
 @Injectable()
 export class WorkloadService {
@@ -8,7 +9,10 @@ export class WorkloadService {
   /**
    * Acute Load: Sum of fatigue in the last 7 days
    */
-  async calculateAcuteLoad(tx: any, athleteId: string): Promise<number> {
+  async calculateAcuteLoad(
+    tx: Prisma.TransactionClient,
+    athleteId: string,
+  ): Promise<number> {
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
@@ -34,7 +38,10 @@ export class WorkloadService {
    * Chronic Load: Average daily fatigue in the last 28 days
    * (Standard model: 4-week average of weekly loads / 4)
    */
-  async calculateChronicLoad(tx: any, athleteId: string): Promise<number> {
+  async calculateChronicLoad(
+    tx: Prisma.TransactionClient,
+    athleteId: string,
+  ): Promise<number> {
     const twentyEightDaysAgo = new Date();
     twentyEightDaysAgo.setDate(twentyEightDaysAgo.getDate() - 28);
 
@@ -63,7 +70,7 @@ export class WorkloadService {
    * ACWR = Acute / Chronic
    */
   async calculateACWR(
-    tx: any,
+    tx: Prisma.TransactionClient,
     athleteId: string,
     currentSessionFatigue: number,
   ) {

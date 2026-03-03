@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../../prisma/prisma.service";
+import { WorkoutSession } from "@prisma/client";
 import { PlateauRule } from "./rules/plateau.rule";
 import { AcwrRule } from "./rules/acwr.rule";
 import { OverloadRule } from "./rules/overload.rule";
@@ -90,8 +91,12 @@ export class InsightsService {
     const latest = workouts[0] as any;
     const last4Weeks = workouts;
 
-    const volumes = last4Weeks.map((w) => (w as any).sessionVolume || 0);
-    const scores = last4Weeks.map((w) => (w as any).sessionScore || 0);
+    const volumes = last4Weeks.map(
+      (w: WorkoutSession) => (w as any).sessionVolume || 0,
+    );
+    const scores = last4Weeks.map(
+      (w: WorkoutSession) => (w as any).sessionScore || 0,
+    );
 
     const maxVolume = Math.max(...volumes);
     const minVolume = Math.min(...volumes);

@@ -5,6 +5,7 @@ import {
 } from "@nestjs/common";
 import { PrismaService } from "../../../prisma/prisma.service";
 import { CreateWorkoutSetDto } from "../dto/create-workout-set.dto";
+import { WorkoutSet } from "@prisma/client";
 import {
   calculateSessionVolume,
   calculateSessionFatigue,
@@ -102,7 +103,7 @@ export class WorkoutsService {
       id: updatedSession!.id,
       blocks: [
         {
-          exercises: updatedSession!.sets.map((s) => ({
+          exercises: updatedSession!.sets.map((s: WorkoutSet) => ({
             exerciseId: s.assignedExerciseId,
             sets: [
               {

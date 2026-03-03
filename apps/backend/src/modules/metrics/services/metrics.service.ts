@@ -2,6 +2,7 @@ import { Injectable, BadRequestException } from "@nestjs/common";
 import { PrismaService } from "../../../prisma/prisma.service";
 import { WorkloadService } from "./workload.service";
 import { InsightsService } from "../../insights/insights.service";
+import { Prisma } from "@prisma/client";
 
 @Injectable()
 export class MetricsService {
@@ -34,22 +35,24 @@ export class MetricsService {
 
     const athleteId = workout.assignedProgram.athleteId;
 
-    const result = await this.prisma.$transaction(async (tx) => {
-      const metrics = await this.calculateSessionMetrics(
-        tx,
-        workoutId,
-        athleteId,
-      );
+    const result = await this.prisma.$transaction(
+      async (tx: Prisma.TransactionClient) => {
+        const metrics = await this.calculateSessionMetrics(
+          tx,
+          workoutId,
+          athleteId,
+        );
 
-      return tx.workoutSession.update({
-        where: { id: workoutId },
-        data: {
-          ...metrics,
-          status: "COMPLETED",
-          completedAt: new Date(),
-        } as any,
-      });
-    });
+        return tx.workoutSession.update({
+          where: { id: workoutId },
+          data: {
+            ...metrics,
+            status: "COMPLETED",
+            completedAt: new Date(),
+          } as any,
+        });
+      },
+    );
 
     // 🔥 Trigger Insight Generation after transaction success
     try {
@@ -71,7 +74,7 @@ export class MetricsService {
   }
 
   private async calculateSessionMetrics(
-    tx: any,
+    tx: Prisma.TransactionClient,
     workoutId: string,
     athleteId: string,
   ) {
@@ -153,6 +156,8 @@ export class MetricsService {
       where: { id: workoutId },
       select: { assignedProgramId: true },
     });
+
+    if (!workout) throw new Error("Internal transaction error: session lost");
 
     const previousWorkouts = await tx.workoutSession.findMany({
       where: {

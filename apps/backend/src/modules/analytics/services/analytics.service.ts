@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "../../../prisma/prisma.service";
+import { WorkoutSet, WorkoutSession } from "@prisma/client";
 import {
   calculatePerformanceScore,
   calculateVolumeProgression,
@@ -37,7 +38,9 @@ export class AnalyticsService {
 
     const consistency = calculateConsistencyIndex(
       program.template.durationWeeks * 4,
-      program.workoutSessions.filter((s) => s.status === "COMPLETED").length,
+      program.workoutSessions.filter(
+        (s: WorkoutSession) => s.status === "COMPLETED",
+      ).length,
     );
 
     const score = calculatePerformanceScore(
@@ -104,8 +107,8 @@ export class AnalyticsService {
       };
 
     // Group by week (ISO Week)
-    const weeksMap = new Map<number, any[]>();
-    sessions.forEach((s) => {
+    const weeksMap = new Map<number, WorkoutSession[]>();
+    sessions.forEach((s: WorkoutSession) => {
       const weekNum = this.getWeekNumber(s.date);
       if (!weeksMap.has(weekNum)) weeksMap.set(weekNum, []);
       weeksMap.get(weekNum)?.push(s);
@@ -126,14 +129,15 @@ export class AnalyticsService {
         (total: number, s: any) =>
           total +
           s.sets.reduce(
-            (st: number, set: any) => st + set.load * set.reps * (set.rpe / 10),
+            (st: number, set: WorkoutSet) =>
+              st + set.load * set.reps * (set.rpe / 10),
             0,
           ),
         0,
       );
       const prs = weekSessions.reduce(
         (total: number, s: any) =>
-          total + s.sets.filter((set: any) => set.isPR).length,
+          total + s.sets.filter((set: WorkoutSet) => set.isPR).length,
         0,
       );
 
@@ -160,7 +164,7 @@ export class AnalyticsService {
     // Exercise Progress
     const exerciseProgress: Record<string, any[]> = {};
     sessions.forEach((s) => {
-      s.sets.forEach((set: any) => {
+      (s as any).sets.forEach((set: any) => {
         const exerciseName = set.assignedExercise.exercise.name;
 
         if (!exerciseProgress[exerciseName])
@@ -198,7 +202,10 @@ export class AnalyticsService {
     return sessions.reduce((total: number, s: any) => {
       return (
         total +
-        s.sets.reduce((st: number, set: any) => st + set.load * set.reps, 0)
+        s.sets.reduce(
+          (st: number, set: WorkoutSet) => st + set.load * set.reps,
+          0,
+        )
       );
     }, 0);
   }
