@@ -1,0 +1,15 @@
+{
+    "name": "performance-os-monorepo",
+    "private": true,
+    "workspaces": [
+        "apps/*",
+        "packages/*"
+    ],
+    "scripts": {
+        "dev:frontend": "npm run dev --workspace=@performance-os/frontend",
+        "dev:backend": "npm run start:dev --workspace=performance-os-backend",
+        "build": "npm run build --workspaces",
+        "prisma:generate": "npm run prisma:generate --workspace=performance-os-backend",
+        "prisma:migrate": "npm run prisma:migrate --workspace=performance-os-backend"
+    }
+}
