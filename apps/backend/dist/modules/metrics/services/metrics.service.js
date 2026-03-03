@@ -81,7 +81,9 @@ let MetricsService = class MetricsService {
             totalRPE += set.rpe;
         }
         const avgRPE = sets.length > 0 ? totalRPE / sets.length : 0;
-        const exerciseIds = [...new Set(sets.map((s) => s.assignedExerciseId))];
+        const exerciseIds = [
+            ...new Set(sets.map((s) => s.assignedExerciseId)),
+        ];
         const historicalSets = await tx.workoutSet.findMany({
             where: {
                 assignedExerciseId: { in: exerciseIds },
@@ -128,8 +130,7 @@ let MetricsService = class MetricsService {
             select: { sessionVolume: true, sessionFatigue: true },
         });
         const avgHistoricalVolume = previousWorkouts.length > 0
-            ? previousWorkouts.reduce((acc, w) => acc + (w.sessionVolume ?? 0), 0) /
-                previousWorkouts.length
+            ? previousWorkouts.reduce((acc, w) => acc + (w.sessionVolume ?? 0), 0) / previousWorkouts.length
             : sessionVolume;
         const normalizedVolume = avgHistoricalVolume > 0 ? sessionVolume / avgHistoricalVolume : 1;
         const normalizedIntensity = avgRPE / 10;

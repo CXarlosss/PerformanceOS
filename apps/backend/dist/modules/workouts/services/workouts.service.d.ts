@@ -7,13 +7,13 @@ export declare class WorkoutsService {
         set: {
             id: string;
             createdAt: Date;
+            assignedExerciseId: string;
             setNumber: number;
             reps: number;
             load: number;
             rpe: number;
             isPR: boolean;
             workoutSessionId: string;
-            assignedExerciseId: string;
         };
         isPR: boolean;
         realtimeMetrics: {
@@ -34,30 +34,31 @@ export declare class WorkoutsService {
                 }[];
             } & {
                 id: string;
-                order: number;
                 sessionId: string;
                 type: string;
+                order: number;
             })[];
         } & {
             id: string;
+            order: number;
             microcycleId: string;
             dayNumber: number;
-            order: number;
             title: string;
         };
         sets: {
             id: string;
             createdAt: Date;
+            assignedExerciseId: string;
             setNumber: number;
             reps: number;
             load: number;
             rpe: number;
             isPR: boolean;
             workoutSessionId: string;
-            assignedExerciseId: string;
         }[];
     } & {
         id: string;
+        createdAt: Date;
         assignedProgramId: string;
         assignedSessionId: string;
         date: Date;
@@ -70,6 +71,5 @@ export declare class WorkoutsService {
         riskLevel: string | null;
         fatigueModelVersion: number | null;
         completedAt: Date | null;
-        createdAt: Date;
     })[]>;
 }

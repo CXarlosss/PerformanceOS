@@ -66,14 +66,22 @@ let AnalyticsService = class AnalyticsService {
             include: {
                 sets: {
                     include: {
-                        assignedExercise: true,
+                        assignedExercise: {
+                            include: {
+                                exercise: true,
+                            },
+                        },
                     },
                 },
                 assignedSession: {
                     include: {
                         blocks: {
                             include: {
-                                exercises: true,
+                                exercises: {
+                                    include: {
+                                        exercise: true,
+                                    },
+                                },
                             },
                         },
                     },
@@ -123,7 +131,7 @@ let AnalyticsService = class AnalyticsService {
         const exerciseProgress = {};
         sessions.forEach((s) => {
             s.sets.forEach((set) => {
-                const exerciseName = set.assignedExercise.exerciseName;
+                const exerciseName = set.assignedExercise.exercise.name;
                 if (!exerciseProgress[exerciseName])
                     exerciseProgress[exerciseName] = [];
                 const e1rm = set.load * (1 + set.reps / 30);

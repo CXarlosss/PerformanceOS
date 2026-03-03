@@ -80,7 +80,6 @@ export class ProgramsService {
                 targetSets: ex.targetSets,
                 targetReps: ex.targetReps,
                 targetRpe: ex.targetRpe,
-                order: ex.order,
               },
             });
           }
@@ -114,7 +113,6 @@ export class ProgramsService {
                   orderBy: { order: "asc" },
                   include: {
                     exercises: {
-                      orderBy: { order: "asc" },
                       include: {
                         exercise: true,
                       },

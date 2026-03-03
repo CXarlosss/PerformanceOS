@@ -103,7 +103,11 @@ export class MetricsService {
     const avgRPE = sets.length > 0 ? totalRPE / sets.length : 0;
 
     // 🔥 2. PR DETECTION (NO N+1)
-    const exerciseIds = [...new Set(sets.map((s) => s.assignedExerciseId))];
+    const exerciseIds = [
+      ...new Set(
+        sets.map((s: { assignedExerciseId: string }) => s.assignedExerciseId),
+      ),
+    ];
 
     const historicalSets = await tx.workoutSet.findMany({
       where: {
@@ -162,8 +166,11 @@ export class MetricsService {
 
     const avgHistoricalVolume =
       previousWorkouts.length > 0
-        ? previousWorkouts.reduce((acc, w) => acc + (w.sessionVolume ?? 0), 0) /
-          previousWorkouts.length
+        ? previousWorkouts.reduce(
+            (acc: number, w: { sessionVolume: number | null }) =>
+              acc + (w.sessionVolume ?? 0),
+            0,
+          ) / previousWorkouts.length
         : sessionVolume;
 
     const normalizedVolume =

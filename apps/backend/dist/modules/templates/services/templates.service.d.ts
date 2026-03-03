@@ -5,11 +5,11 @@ export declare class TemplatesService {
     constructor(prisma: PrismaService);
     create(dto: CreateTemplateDto, userId: string): Promise<{
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         name: string;
         description: string | null;
         durationWeeks: number;
-        createdAt: Date;
-        updatedAt: Date;
         createdById: string;
     }>;
     getAll(): Promise<({
@@ -18,11 +18,11 @@ export declare class TemplatesService {
         };
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         name: string;
         description: string | null;
         durationWeeks: number;
-        createdAt: Date;
-        updatedAt: Date;
         createdById: string;
     })[]>;
     findAll(): Promise<({
@@ -32,47 +32,47 @@ export declare class TemplatesService {
                     exercises: ({
                         exercise: {
                             id: string;
-                            name: string;
                             createdAt: Date;
+                            name: string;
                             category: string | null;
                             muscleGroup: string | null;
                             isCompound: boolean;
                         };
                     } & {
                         id: string;
-                        order: number;
+                        blockId: string;
+                        exerciseId: string;
                         targetSets: number;
                         targetReps: number;
                         targetRpe: number;
-                        exerciseId: string;
-                        blockId: string;
+                        order: number;
                     })[];
                 } & {
                     id: string;
-                    order: number;
-                    type: string;
                     sessionId: string;
+                    type: string;
+                    order: number;
                 })[];
             } & {
                 id: string;
                 order: number;
+                microcycleId: string;
                 dayNumber: number;
                 title: string;
-                microcycleId: string;
             })[];
         } & {
             id: string;
-            weekNumber: number;
-            order: number;
             templateId: string;
+            order: number;
+            weekNumber: number;
         })[];
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         name: string;
         description: string | null;
         durationWeeks: number;
-        createdAt: Date;
-        updatedAt: Date;
         createdById: string;
     })[]>;
     findOne(id: string): Promise<{
@@ -82,47 +82,47 @@ export declare class TemplatesService {
                     exercises: ({
                         exercise: {
                             id: string;
-                            name: string;
                             createdAt: Date;
+                            name: string;
                             category: string | null;
                             muscleGroup: string | null;
                             isCompound: boolean;
                         };
                     } & {
                         id: string;
-                        order: number;
+                        blockId: string;
+                        exerciseId: string;
                         targetSets: number;
                         targetReps: number;
                         targetRpe: number;
-                        exerciseId: string;
-                        blockId: string;
+                        order: number;
                     })[];
                 } & {
                     id: string;
-                    order: number;
-                    type: string;
                     sessionId: string;
+                    type: string;
+                    order: number;
                 })[];
             } & {
                 id: string;
                 order: number;
+                microcycleId: string;
                 dayNumber: number;
                 title: string;
-                microcycleId: string;
             })[];
         } & {
             id: string;
-            weekNumber: number;
-            order: number;
             templateId: string;
+            order: number;
+            weekNumber: number;
         })[];
     } & {
         id: string;
+        createdAt: Date;
+        updatedAt: Date;
         name: string;
         description: string | null;
         durationWeeks: number;
-        createdAt: Date;
-        updatedAt: Date;
         createdById: string;
     }>;
 }

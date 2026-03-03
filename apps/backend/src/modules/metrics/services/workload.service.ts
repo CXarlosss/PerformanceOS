@@ -23,7 +23,11 @@ export class WorkloadService {
       select: { sessionFatigue: true },
     });
 
-    return workouts.reduce((acc, w) => acc + (w.sessionFatigue ?? 0), 0);
+    return workouts.reduce(
+      (acc: number, w: { sessionFatigue: number | null }) =>
+        acc + (w.sessionFatigue ?? 0),
+      0,
+    );
   }
 
   /**
@@ -46,7 +50,8 @@ export class WorkloadService {
     });
 
     const totalFatigue = workouts.reduce(
-      (acc, w) => acc + (w.sessionFatigue ?? 0),
+      (acc: number, w: { sessionFatigue: number | null }) =>
+        acc + (w.sessionFatigue ?? 0),
       0,
     );
 

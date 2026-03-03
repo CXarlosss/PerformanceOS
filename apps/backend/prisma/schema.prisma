@@ -318,8 +318,6 @@ model AssignedExercise {
   targetReps Int
   targetRpe  Float
 
-  order Int
-
   workoutSets WorkoutSet[]
 
   @@index([blockId])
