@@ -40,6 +40,20 @@ enum InsightSeverity {
   HIGH
 }
 
+enum AthleteLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum BlockType {
+  STRENGTH
+  HYPERTROPHY
+  POWER
+  ENDURANCE
+  ACCESSORY
+}
+
 ////////////////////////////////////////////////////////////
 // 👤 USERS
 ////////////////////////////////////////////////////////////
@@ -70,7 +84,7 @@ model AthleteProfile {
   user   User   @relation(fields: [userId], references: [id])
 
   name      String
-  level     String
+  level     AthleteLevel
   coachId   String?
 
   createdAt DateTime @default(now())
@@ -194,7 +208,7 @@ model TemplateBlock {
   sessionId String
   session   TemplateSession @relation(fields: [sessionId], references: [id])
 
-  type  String
+  type  BlockType
   order Int
 
   exercises TemplateExercise[]
@@ -294,7 +308,7 @@ model AssignedBlock {
   sessionId String
   session   AssignedSession @relation(fields: [sessionId], references: [id])
 
-  type  String
+  type  BlockType
   order Int
 
   exercises AssignedExercise[]

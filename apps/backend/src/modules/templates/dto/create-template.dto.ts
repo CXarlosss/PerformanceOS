@@ -9,6 +9,7 @@ import {
   Max,
 } from "class-validator";
 import { Type } from "class-transformer";
+import { BlockType } from "@prisma/client";
 
 class TemplateExerciseDto {
   @IsUUID()
@@ -29,8 +30,8 @@ class TemplateExerciseDto {
 }
 
 class TemplateBlockDto {
-  @IsString()
-  type!: string; // STRENGTH, HYPERTROPHY, etc.
+  @IsEnum(BlockType)
+  type!: BlockType; // STRENGTH, HYPERTROPHY, POWER, ENDURANCE, ACCESSORY
 
   @IsArray()
   @ValidateNested({ each: true })
@@ -49,11 +50,8 @@ class TemplateSessionDto {
 }
 
 class TemplateMicrocycleDto {
-  @IsString()
-  name!: string;
-
   @IsInt()
-  order!: number;
+  weekNumber!: number;
 
   @IsArray()
   @ValidateNested({ each: true })

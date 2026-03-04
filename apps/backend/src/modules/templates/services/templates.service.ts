@@ -15,7 +15,7 @@ export class TemplatesService {
         createdById: userId,
         microcycles: {
           create: dto.microcycles.map((m, microIndex) => ({
-            weekNumber: microIndex + 1,
+            weekNumber: m.weekNumber,
             order: microIndex + 1,
             sessions: {
               create: m.sessions.map((s, sessionIndex) => ({

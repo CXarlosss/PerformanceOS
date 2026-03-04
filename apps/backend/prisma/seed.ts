@@ -28,6 +28,63 @@ async function main() {
 
   console.log("🚀 Admin user created successfully");
   console.log("Email:", adminEmail);
+
+  // 🏋 GLOBAL EXERCISE CATALOG SEED
+  const exercises = [
+    {
+      name: "Deadlift",
+      category: "STRENGTH",
+      muscleGroup: "BACK",
+      isCompound: true,
+    },
+    {
+      name: "Back Squat",
+      category: "STRENGTH",
+      muscleGroup: "LEGS",
+      isCompound: true,
+    },
+    {
+      name: "Bench Press",
+      category: "STRENGTH",
+      muscleGroup: "CHEST",
+      isCompound: true,
+    },
+    {
+      name: "Overhead Press",
+      category: "STRENGTH",
+      muscleGroup: "SHOULDERS",
+      isCompound: true,
+    },
+    {
+      name: "Bicep Curl",
+      category: "HYPERTROPHY",
+      muscleGroup: "ARMS",
+      isCompound: false,
+    },
+    {
+      name: "Tricep Extension",
+      category: "HYPERTROPHY",
+      muscleGroup: "ARMS",
+      isCompound: false,
+    },
+  ];
+
+  for (const ex of exercises) {
+    const existing = await prisma.exercise.findFirst({
+      where: { name: ex.name },
+    });
+    if (!existing) {
+      await prisma.exercise.create({
+        data: {
+          name: ex.name,
+          category: ex.category,
+          muscleGroup: ex.muscleGroup,
+          isCompound: ex.isCompound,
+        },
+      });
+    }
+  }
+  console.log("🏋 Exercises seeded successfully");
 }
 
 main()
