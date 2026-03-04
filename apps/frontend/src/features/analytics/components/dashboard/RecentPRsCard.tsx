@@ -29,7 +29,7 @@ export const RecentPRsCard: React.FC<RecentPRsCardProps> = ({ prs }) => {
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
         {prs.length > 0 ? (
-          prs.map((pr, i) => (
+          prs.map((pr: PR, i: number) => (
             <div
               key={i}
               style={{

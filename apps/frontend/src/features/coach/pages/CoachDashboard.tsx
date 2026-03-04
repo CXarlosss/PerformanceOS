@@ -86,7 +86,7 @@ export const CoachDashboard: React.FC = () => {
           gap: "16px",
         }}
       >
-        {stats.map((s, i) => (
+        {stats.map((s: any, i: number) => (
           <div
             key={i}
             className="card"

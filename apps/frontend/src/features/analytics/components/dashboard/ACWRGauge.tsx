@@ -56,7 +56,7 @@ export const ACWRGauge: React.FC<ACWRGaugeProps> = ({ value }) => {
               dataKey="value"
               stroke="none"
             >
-              {data.map((entry, index) => (
+              {data.map((entry: any, index: number) => (
                 <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
             </Pie>
