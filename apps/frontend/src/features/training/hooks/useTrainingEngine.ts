@@ -43,9 +43,10 @@ export const useTrainingEngine = () => {
       systemConfig.prThreshold,
     );
 
-    const prevMicrocycle = trainingHistory[trainingHistory.length - 1];
+    const history = client?.id ? trainingHistory[client.id] || [] : [];
+    const prevMicrocycle = history[history.length - 1];
     const prevVolume = prevMicrocycle
-      ? calculateMicrocycleVolume(prevMicrocycle)
+      ? calculateMicrocycleVolume(prevMicrocycle as any)
       : 0;
     const volumeDelta = calculateVolumeDelta(weeklyVolume, prevVolume);
 

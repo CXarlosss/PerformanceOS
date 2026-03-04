@@ -2,16 +2,16 @@ import { create } from "zustand";
 
 interface TrainingState {
   activeMicrocycle: any | null;
-  trainingHistory: any[];
+  trainingHistory: Record<string, any[]>;
 
   setActiveMicrocycle: (microcycle: any) => void;
-  setTrainingHistory: (history: any[]) => void;
+  setTrainingHistory: (history: Record<string, any[]>) => void;
   clearTrainingState: () => void;
 }
 
 export const useTrainingStore = create<TrainingState>((set) => ({
   activeMicrocycle: null,
-  trainingHistory: [],
+  trainingHistory: {},
 
   setActiveMicrocycle: (microcycle) =>
     set({
@@ -26,6 +26,6 @@ export const useTrainingStore = create<TrainingState>((set) => ({
   clearTrainingState: () =>
     set({
       activeMicrocycle: null,
-      trainingHistory: [],
+      trainingHistory: {},
     }),
 }));

@@ -6,7 +6,7 @@ import { FatigueAreaChart } from "./components/FatigueAreaChart";
 import { ExerciseProgressChart } from "./components/ExerciseProgressChart";
 import { AlertPanel } from "./components/AlertPanel";
 import { WeeklyTableHistory } from "./components/WeeklyTableHistory";
-import { ChevronLeft, Calendar, FileDown } from "lucide-react";
+import { ChevronLeft, FileDown } from "lucide-react";
 
 interface Props {
   athleteId: string;

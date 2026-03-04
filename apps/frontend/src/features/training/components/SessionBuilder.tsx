@@ -1,6 +1,5 @@
 import React from "react";
 import { useCurrentProgram, usePostWorkoutSet } from "../hooks/useTrainingData";
-import type { Session } from "@performance-os/core-engine";
 
 export const SessionBuilder: React.FC = () => {
   const { data: program, isLoading } = useCurrentProgram();
