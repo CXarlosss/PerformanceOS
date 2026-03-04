@@ -4,15 +4,15 @@ import { apiClient } from "../../../api/apiClient";
 // ==========================
 
 export const templatesApi = {
-    getAll: async () => {
-        const { data } = await apiClient.get('/templates');
-        return data;
-    },
+  getAll: async () => {
+    const { data } = await apiClient.get("templates");
+    return data;
+  },
 
-    create: async (payload: any) => {
-        const { data } = await apiClient.post('/templates', payload);
-        return data;
-    },
+  create: async (payload: any) => {
+    const { data } = await apiClient.post("templates", payload);
+    return data;
+  },
 };
 
 // ==========================
@@ -20,15 +20,15 @@ export const templatesApi = {
 // ==========================
 
 export const athletesApi = {
-    getAll: async () => {
-        const { data } = await apiClient.get('/athletes');
-        return data;
-    },
+  getAll: async () => {
+    const { data } = await apiClient.get("athletes");
+    return data;
+  },
 
-    getOne: async (id: string) => {
-        const { data } = await apiClient.get(`/athletes/${id}`);
-        return data;
-    },
+  getOne: async (id: string) => {
+    const { data } = await apiClient.get(`athletes/${id}`);
+    return data;
+  },
 };
 
 // ==========================
@@ -36,8 +36,8 @@ export const athletesApi = {
 // ==========================
 
 export const coachProgramsApi = {
-    assign: async (payload: { athleteId: string; templateId: string }) => {
-        const { data } = await apiClient.post('/programs/assign', payload);
-        return data;
-    },
+  assign: async (payload: { athleteId: string; templateId: string }) => {
+    const { data } = await apiClient.post("programs/assign", payload);
+    return data;
+  },
 };
