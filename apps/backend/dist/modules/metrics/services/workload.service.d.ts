@@ -1,10 +1,11 @@
 import { PrismaService } from "../../../prisma/prisma.service";
+import { Prisma } from "@prisma/client";
 export declare class WorkloadService {
     private prisma;
     constructor(prisma: PrismaService);
-    calculateAcuteLoad(tx: any, athleteId: string): Promise<number>;
-    calculateChronicLoad(tx: any, athleteId: string): Promise<number>;
-    calculateACWR(tx: any, athleteId: string, currentSessionFatigue: number): Promise<{
+    calculateAcuteLoad(tx: Prisma.TransactionClient, athleteId: string): Promise<number>;
+    calculateChronicLoad(tx: Prisma.TransactionClient, athleteId: string): Promise<number>;
+    calculateACWR(tx: Prisma.TransactionClient, athleteId: string, currentSessionFatigue: number): Promise<{
         acwr: number;
         riskLevel: string;
     }>;

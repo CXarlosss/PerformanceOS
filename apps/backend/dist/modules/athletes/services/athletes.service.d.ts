@@ -1,24 +1,34 @@
 import { PrismaService } from "../../../prisma/prisma.service";
+import { CreateAthleteDto } from "../dto/create-athlete.dto";
 export declare class AthletesService {
     private prisma;
     constructor(prisma: PrismaService);
+    create(dto: CreateAthleteDto, coachId: string): Promise<{
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        name: string;
+        userId: string;
+        level: import(".prisma/client").$Enums.AthleteLevel;
+        coachId: string | null;
+    }>;
     findAll(): Promise<({
         coach: {
             id: string;
+            createdAt: Date;
+            updatedAt: Date;
             email: string;
             passwordHash: string;
             role: import(".prisma/client").$Enums.Role;
-            createdAt: Date;
-            updatedAt: Date;
         } | null;
         assignedPrograms: {
             id: string;
             createdAt: Date;
-            updatedAt: Date;
             status: import(".prisma/client").$Enums.ProgramStatus;
             templateId: string;
             athleteId: string;
             startDate: Date;
+            updatedAt: Date;
         }[];
     } & {
         id: string;
@@ -26,7 +36,7 @@ export declare class AthletesService {
         updatedAt: Date;
         name: string;
         userId: string;
-        level: string;
+        level: import(".prisma/client").$Enums.AthleteLevel;
         coachId: string | null;
     })[]>;
     findOne(id: string): Promise<{
@@ -44,15 +54,15 @@ export declare class AthletesService {
                         }[];
                     } & {
                         id: string;
-                        sessionId: string;
-                        type: string;
                         order: number;
+                        sessionId: string;
+                        type: import(".prisma/client").$Enums.BlockType;
                     })[];
                 } & {
                     id: string;
-                    order: number;
                     microcycleId: string;
                     dayNumber: number;
+                    order: number;
                     title: string;
                 })[];
             } & {
@@ -64,11 +74,11 @@ export declare class AthletesService {
         } & {
             id: string;
             createdAt: Date;
-            updatedAt: Date;
             status: import(".prisma/client").$Enums.ProgramStatus;
             templateId: string;
             athleteId: string;
             startDate: Date;
+            updatedAt: Date;
         })[];
     } & {
         id: string;
@@ -76,7 +86,7 @@ export declare class AthletesService {
         updatedAt: Date;
         name: string;
         userId: string;
-        level: string;
+        level: import(".prisma/client").$Enums.AthleteLevel;
         coachId: string | null;
     }>;
 }

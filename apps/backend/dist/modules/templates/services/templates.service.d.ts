@@ -1,4 +1,4 @@
-import { PrismaService } from "src/prisma/prisma.service";
+import { PrismaService } from "../../../prisma/prisma.service";
 import { CreateTemplateDto } from "../dto/create-template.dto";
 export declare class TemplatesService {
     private prisma;
@@ -40,24 +40,24 @@ export declare class TemplatesService {
                         };
                     } & {
                         id: string;
+                        order: number;
                         blockId: string;
                         exerciseId: string;
                         targetSets: number;
                         targetReps: number;
                         targetRpe: number;
-                        order: number;
                     })[];
                 } & {
                     id: string;
-                    sessionId: string;
-                    type: string;
                     order: number;
+                    sessionId: string;
+                    type: import(".prisma/client").$Enums.BlockType;
                 })[];
             } & {
                 id: string;
-                order: number;
                 microcycleId: string;
                 dayNumber: number;
+                order: number;
                 title: string;
             })[];
         } & {
@@ -90,24 +90,24 @@ export declare class TemplatesService {
                         };
                     } & {
                         id: string;
+                        order: number;
                         blockId: string;
                         exerciseId: string;
                         targetSets: number;
                         targetReps: number;
                         targetRpe: number;
-                        order: number;
                     })[];
                 } & {
                     id: string;
-                    sessionId: string;
-                    type: string;
                     order: number;
+                    sessionId: string;
+                    type: import(".prisma/client").$Enums.BlockType;
                 })[];
             } & {
                 id: string;
-                order: number;
                 microcycleId: string;
                 dayNumber: number;
+                order: number;
                 title: string;
             })[];
         } & {

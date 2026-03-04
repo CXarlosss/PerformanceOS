@@ -6,8 +6,8 @@ export declare class ProgramsService {
     constructor(prisma: PrismaService);
     assign(dto: AssignProgramDto): Promise<{
         id: string;
-        status: import(".prisma/client").$Enums.ProgramStatus;
         createdAt: Date;
+        status: import(".prisma/client").$Enums.ProgramStatus;
         templateId: string;
         athleteId: string;
         startDate: Date;
@@ -19,9 +19,9 @@ export declare class ProgramsService {
                 blocks: ({
                     exercises: ({
                         exercise: {
-                            name: string;
                             id: string;
                             createdAt: Date;
+                            name: string;
                             category: string | null;
                             muscleGroup: string | null;
                             isCompound: boolean;
@@ -38,7 +38,7 @@ export declare class ProgramsService {
                     id: string;
                     order: number;
                     sessionId: string;
-                    type: string;
+                    type: import(".prisma/client").$Enums.BlockType;
                 })[];
             } & {
                 id: string;
@@ -55,8 +55,8 @@ export declare class ProgramsService {
         })[];
     } & {
         id: string;
-        status: import(".prisma/client").$Enums.ProgramStatus;
         createdAt: Date;
+        status: import(".prisma/client").$Enums.ProgramStatus;
         templateId: string;
         athleteId: string;
         startDate: Date;

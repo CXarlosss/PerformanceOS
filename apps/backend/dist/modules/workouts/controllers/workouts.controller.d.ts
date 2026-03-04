@@ -8,12 +8,12 @@ export declare class WorkoutsController {
     registerSet(sessionId: string, dto: CreateWorkoutSetDto, req: any): Promise<{
         set: {
             id: string;
-            createdAt: Date;
             setNumber: number;
             reps: number;
             load: number;
             rpe: number;
             isPR: boolean;
+            createdAt: Date;
             workoutSessionId: string;
             assignedExerciseId: string;
         };
@@ -38,7 +38,7 @@ export declare class WorkoutsController {
                 id: string;
                 order: number;
                 sessionId: string;
-                type: string;
+                type: import(".prisma/client").$Enums.BlockType;
             })[];
         } & {
             id: string;
@@ -49,17 +49,18 @@ export declare class WorkoutsController {
         };
         sets: {
             id: string;
-            createdAt: Date;
             setNumber: number;
             reps: number;
             load: number;
             rpe: number;
             isPR: boolean;
+            createdAt: Date;
             workoutSessionId: string;
             assignedExerciseId: string;
         }[];
     } & {
         id: string;
+        createdAt: Date;
         assignedProgramId: string;
         assignedSessionId: string;
         date: Date;
@@ -72,10 +73,10 @@ export declare class WorkoutsController {
         riskLevel: string | null;
         fatigueModelVersion: number | null;
         completedAt: Date | null;
-        createdAt: Date;
     })[]>;
     completeWorkout(id: string): Promise<{
         id: string;
+        createdAt: Date;
         assignedProgramId: string;
         assignedSessionId: string;
         date: Date;
@@ -88,6 +89,5 @@ export declare class WorkoutsController {
         riskLevel: string | null;
         fatigueModelVersion: number | null;
         completedAt: Date | null;
-        createdAt: Date;
     }>;
 }

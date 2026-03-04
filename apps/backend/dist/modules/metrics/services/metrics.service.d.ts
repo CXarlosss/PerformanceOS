@@ -8,6 +8,7 @@ export declare class MetricsService {
     constructor(prisma: PrismaService, workloadService: WorkloadService, insightsService: InsightsService);
     completeWorkout(workoutId: string): Promise<{
         id: string;
+        createdAt: Date;
         assignedProgramId: string;
         assignedSessionId: string;
         date: Date;
@@ -20,7 +21,6 @@ export declare class MetricsService {
         riskLevel: string | null;
         fatigueModelVersion: number | null;
         completedAt: Date | null;
-        createdAt: Date;
     }>;
     private estimate1RM;
     private calculateSessionMetrics;

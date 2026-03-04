@@ -27,24 +27,24 @@ export declare class TemplatesController {
                         };
                     } & {
                         id: string;
+                        order: number;
                         blockId: string;
                         exerciseId: string;
                         targetSets: number;
                         targetReps: number;
                         targetRpe: number;
-                        order: number;
                     })[];
                 } & {
                     id: string;
-                    sessionId: string;
-                    type: string;
                     order: number;
+                    sessionId: string;
+                    type: import(".prisma/client").$Enums.BlockType;
                 })[];
             } & {
                 id: string;
-                order: number;
                 microcycleId: string;
                 dayNumber: number;
+                order: number;
                 title: string;
             })[];
         } & {
@@ -77,24 +77,24 @@ export declare class TemplatesController {
                         };
                     } & {
                         id: string;
+                        order: number;
                         blockId: string;
                         exerciseId: string;
                         targetSets: number;
                         targetReps: number;
                         targetRpe: number;
-                        order: number;
                     })[];
                 } & {
                     id: string;
-                    sessionId: string;
-                    type: string;
                     order: number;
+                    sessionId: string;
+                    type: import(".prisma/client").$Enums.BlockType;
                 })[];
             } & {
                 id: string;
-                order: number;
                 microcycleId: string;
                 dayNumber: number;
+                order: number;
                 title: string;
             })[];
         } & {

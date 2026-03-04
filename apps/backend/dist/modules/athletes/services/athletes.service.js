@@ -12,9 +12,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AthletesService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../../../prisma/prisma.service");
+const bcrypt = require("bcrypt");
 let AthletesService = class AthletesService {
     constructor(prisma) {
         this.prisma = prisma;
+    }
+    async create(dto, coachId) {
+        const hashedPassword = await bcrypt.hash(dto.password, 10);
+        return this.prisma.$transaction(async (tx) => {
+            const user = await tx.user.create({
+                data: {
+                    email: dto.email,
+                    passwordHash: hashedPassword,
+                    role: "ATHLETE",
+                },
+            });
+            return tx.athleteProfile.create({
+                data: {
+                    name: dto.name,
+                    level: dto.level,
+                    userId: user.id,
+                    coachId: coachId,
+                },
+            });
+        });
     }
     async findAll() {
         return this.prisma.athleteProfile.findMany({

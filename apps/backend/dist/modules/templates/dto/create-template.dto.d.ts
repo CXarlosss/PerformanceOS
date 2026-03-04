@@ -1,3 +1,4 @@
+import { BlockType } from "@prisma/client";
 declare class TemplateExerciseDto {
     exerciseId: string;
     targetSets: number;
@@ -5,7 +6,7 @@ declare class TemplateExerciseDto {
     targetRpe: number;
 }
 declare class TemplateBlockDto {
-    type: string;
+    type: BlockType;
     exercises: TemplateExerciseDto[];
 }
 declare class TemplateSessionDto {
@@ -13,8 +14,7 @@ declare class TemplateSessionDto {
     blocks: TemplateBlockDto[];
 }
 declare class TemplateMicrocycleDto {
-    name: string;
-    order: number;
+    weekNumber: number;
     sessions: TemplateSessionDto[];
 }
 export declare class CreateTemplateDto {

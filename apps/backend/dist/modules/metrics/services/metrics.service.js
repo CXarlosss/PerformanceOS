@@ -120,6 +120,8 @@ let MetricsService = class MetricsService {
             where: { id: workoutId },
             select: { assignedProgramId: true },
         });
+        if (!workout)
+            throw new Error("Internal transaction error: session lost");
         const previousWorkouts = await tx.workoutSession.findMany({
             where: {
                 assignedProgramId: workout.assignedProgramId,

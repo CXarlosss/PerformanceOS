@@ -6,14 +6,14 @@ export declare class WorkoutsService {
     registerSet(sessionId: string, dto: CreateWorkoutSetDto, athleteUserId: string): Promise<{
         set: {
             id: string;
-            createdAt: Date;
-            assignedExerciseId: string;
             setNumber: number;
             reps: number;
             load: number;
             rpe: number;
             isPR: boolean;
+            createdAt: Date;
             workoutSessionId: string;
+            assignedExerciseId: string;
         };
         isPR: boolean;
         realtimeMetrics: {
@@ -34,27 +34,27 @@ export declare class WorkoutsService {
                 }[];
             } & {
                 id: string;
-                sessionId: string;
-                type: string;
                 order: number;
+                sessionId: string;
+                type: import(".prisma/client").$Enums.BlockType;
             })[];
         } & {
             id: string;
-            order: number;
             microcycleId: string;
             dayNumber: number;
+            order: number;
             title: string;
         };
         sets: {
             id: string;
-            createdAt: Date;
-            assignedExerciseId: string;
             setNumber: number;
             reps: number;
             load: number;
             rpe: number;
             isPR: boolean;
+            createdAt: Date;
             workoutSessionId: string;
+            assignedExerciseId: string;
         }[];
     } & {
         id: string;

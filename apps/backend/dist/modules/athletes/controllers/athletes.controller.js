@@ -16,9 +16,14 @@ exports.AthletesController = void 0;
 const common_1 = require("@nestjs/common");
 const athletes_service_1 = require("../services/athletes.service");
 const jwt_auth_guard_1 = require("../../auth/guards/jwt-auth.guard");
+const create_athlete_dto_1 = require("../dto/create-athlete.dto");
 let AthletesController = class AthletesController {
     constructor(athletesService) {
         this.athletesService = athletesService;
+    }
+    async create(dto, req) {
+        const coachId = req.user.userId;
+        return this.athletesService.create(dto, coachId);
     }
     async findAll() {
         return this.athletesService.findAll();
@@ -28,6 +33,14 @@ let AthletesController = class AthletesController {
     }
 };
 exports.AthletesController = AthletesController;
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_athlete_dto_1.CreateAthleteDto, Object]),
+    __metadata("design:returntype", Promise)
+], AthletesController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),

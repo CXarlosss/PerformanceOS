@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TemplatesService = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("src/prisma/prisma.service");
+const prisma_service_1 = require("../../../prisma/prisma.service");
 let TemplatesService = class TemplatesService {
     constructor(prisma) {
         this.prisma = prisma;
@@ -25,7 +25,7 @@ let TemplatesService = class TemplatesService {
                 createdById: userId,
                 microcycles: {
                     create: dto.microcycles.map((m, microIndex) => ({
-                        weekNumber: microIndex + 1,
+                        weekNumber: m.weekNumber,
                         order: microIndex + 1,
                         sessions: {
                             create: m.sessions.map((s, sessionIndex) => ({

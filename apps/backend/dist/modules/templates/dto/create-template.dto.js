@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateTemplateDto = void 0;
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
+const client_1 = require("@prisma/client");
 class TemplateExerciseDto {
 }
 __decorate([
@@ -37,7 +38,7 @@ __decorate([
 class TemplateBlockDto {
 }
 __decorate([
-    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsEnum)(client_1.BlockType),
     __metadata("design:type", String)
 ], TemplateBlockDto.prototype, "type", void 0);
 __decorate([
@@ -61,13 +62,9 @@ __decorate([
 class TemplateMicrocycleDto {
 }
 __decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], TemplateMicrocycleDto.prototype, "name", void 0);
-__decorate([
     (0, class_validator_1.IsInt)(),
     __metadata("design:type", Number)
-], TemplateMicrocycleDto.prototype, "order", void 0);
+], TemplateMicrocycleDto.prototype, "weekNumber", void 0);
 __decorate([
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.ValidateNested)({ each: true }),

@@ -10,9 +10,9 @@ export declare class ProgramsController {
                 blocks: ({
                     exercises: ({
                         exercise: {
-                            name: string;
                             id: string;
                             createdAt: Date;
+                            name: string;
                             category: string | null;
                             muscleGroup: string | null;
                             isCompound: boolean;
@@ -29,7 +29,7 @@ export declare class ProgramsController {
                     id: string;
                     order: number;
                     sessionId: string;
-                    type: string;
+                    type: import(".prisma/client").$Enums.BlockType;
                 })[];
             } & {
                 id: string;
@@ -46,8 +46,8 @@ export declare class ProgramsController {
         })[];
     } & {
         id: string;
-        status: import(".prisma/client").$Enums.ProgramStatus;
         createdAt: Date;
+        status: import(".prisma/client").$Enums.ProgramStatus;
         templateId: string;
         athleteId: string;
         startDate: Date;
@@ -55,8 +55,8 @@ export declare class ProgramsController {
     }) | null>;
     assign(dto: AssignProgramDto): Promise<{
         id: string;
-        status: import(".prisma/client").$Enums.ProgramStatus;
         createdAt: Date;
+        status: import(".prisma/client").$Enums.ProgramStatus;
         templateId: string;
         athleteId: string;
         startDate: Date;
