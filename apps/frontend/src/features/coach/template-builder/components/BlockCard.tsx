@@ -63,7 +63,7 @@ export const BlockCard: React.FC<Props> = ({
       </div>
 
       <div style={{ display: "flex", flexDirection: "column" }}>
-        {block.exercises.map((e) => (
+        {block.exercises.map((e: any) => (
           <ExerciseRow
             key={e.id}
             microcycleId={microcycleId}

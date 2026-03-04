@@ -14,7 +14,7 @@ interface VolumeChartProps {
 }
 
 export const VolumeChart: React.FC<VolumeChartProps> = ({ data }) => {
-  const formattedData = data.map((d) => ({
+  const formattedData = data.map((d: any) => ({
     ...d,
     dateLabel: new Date(d.weekStart).toLocaleDateString("es-ES", {
       day: "2-digit",

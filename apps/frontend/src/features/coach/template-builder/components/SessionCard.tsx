@@ -59,7 +59,7 @@ export const SessionCard: React.FC<Props> = ({ microcycleId, session }) => {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column" }}>
-        {session.blocks.map((b) => (
+        {session.blocks.map((b: any) => (
           <BlockCard
             key={b.id}
             microcycleId={microcycleId}
@@ -69,7 +69,7 @@ export const SessionCard: React.FC<Props> = ({ microcycleId, session }) => {
         ))}
 
         <div style={{ display: "flex", gap: "8px", marginTop: "16px" }}>
-          {["Fuerza", "Hipertrofia", "Cardio", "Prep"].map((type) => (
+          {["Fuerza", "Hipertrofia", "Cardio", "Prep"].map((type: string) => (
             <button
               key={type}
               onClick={() =>

@@ -60,7 +60,7 @@ export const MicrocycleColumn: React.FC<Props> = ({ microcycle }) => {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column" }}>
-        {microcycle.sessions.map((s) => (
+        {microcycle.sessions.map((s: any) => (
           <SessionCard key={s.id} microcycleId={microcycle.id} session={s} />
         ))}
 

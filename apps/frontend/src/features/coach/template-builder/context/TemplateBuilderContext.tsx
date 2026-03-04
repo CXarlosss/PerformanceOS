@@ -98,14 +98,14 @@ export const TemplateBuilderProvider: React.FC<{
   const removeMicrocycle = (id: string) => {
     setTemplate((prev) => ({
       ...prev,
-      microcycles: prev.microcycles.filter((m) => m.id !== id),
+      microcycles: prev.microcycles.filter((m: any) => m.id !== id),
     }));
   };
 
   const addSession = (microcycleId: string) => {
     setTemplate((prev) => ({
       ...prev,
-      microcycles: prev.microcycles.map((m) =>
+      microcycles: prev.microcycles.map((m: any) =>
         m.id === microcycleId
           ? {
               ...m,
@@ -126,11 +126,11 @@ export const TemplateBuilderProvider: React.FC<{
   const removeSession = (microcycleId: string, sessionId: string) => {
     setTemplate((prev) => ({
       ...prev,
-      microcycles: prev.microcycles.map((m) =>
+      microcycles: prev.microcycles.map((m: any) =>
         m.id === microcycleId
           ? {
               ...m,
-              sessions: m.sessions.filter((s) => s.id !== sessionId),
+              sessions: m.sessions.filter((s: any) => s.id !== sessionId),
             }
           : m,
       ),
@@ -144,11 +144,11 @@ export const TemplateBuilderProvider: React.FC<{
   ) => {
     setTemplate((prev) => ({
       ...prev,
-      microcycles: prev.microcycles.map((m) =>
+      microcycles: prev.microcycles.map((m: any) =>
         m.id === microcycleId
           ? {
               ...m,
-              sessions: m.sessions.map((s) =>
+              sessions: m.sessions.map((s: any) =>
                 s.id === sessionId ? { ...s, ...updates } : s,
               ),
             }
@@ -160,11 +160,11 @@ export const TemplateBuilderProvider: React.FC<{
   const addBlock = (microcycleId: string, sessionId: string, type: string) => {
     setTemplate((prev) => ({
       ...prev,
-      microcycles: prev.microcycles.map((m) =>
+      microcycles: prev.microcycles.map((m: any) =>
         m.id === microcycleId
           ? {
               ...m,
-              sessions: m.sessions.map((s) =>
+              sessions: m.sessions.map((s: any) =>
                 s.id === sessionId
                   ? {
                       ...s,
@@ -188,15 +188,15 @@ export const TemplateBuilderProvider: React.FC<{
   ) => {
     setTemplate((prev) => ({
       ...prev,
-      microcycles: prev.microcycles.map((m) =>
+      microcycles: prev.microcycles.map((m: any) =>
         m.id === microcycleId
           ? {
               ...m,
-              sessions: m.sessions.map((s) =>
+              sessions: m.sessions.map((s: any) =>
                 s.id === sessionId
                   ? {
                       ...s,
-                      blocks: s.blocks.filter((b) => b.id !== blockId),
+                      blocks: s.blocks.filter((b: any) => b.id !== blockId),
                     }
                   : s,
               ),
@@ -214,15 +214,15 @@ export const TemplateBuilderProvider: React.FC<{
   ) => {
     setTemplate((prev) => ({
       ...prev,
-      microcycles: prev.microcycles.map((m) =>
+      microcycles: prev.microcycles.map((m: any) =>
         m.id === microcycleId
           ? {
               ...m,
-              sessions: m.sessions.map((s) =>
+              sessions: m.sessions.map((s: any) =>
                 s.id === sessionId
                   ? {
                       ...s,
-                      blocks: s.blocks.map((b) =>
+                      blocks: s.blocks.map((b: any) =>
                         b.id === blockId
                           ? {
                               ...b,
@@ -257,19 +257,19 @@ export const TemplateBuilderProvider: React.FC<{
   ) => {
     setTemplate((prev) => ({
       ...prev,
-      microcycles: prev.microcycles.map((m) =>
+      microcycles: prev.microcycles.map((m: any) =>
         m.id === microcycleId
           ? {
               ...m,
-              sessions: m.sessions.map((s) =>
+              sessions: m.sessions.map((s: any) =>
                 s.id === sessionId
                   ? {
                       ...s,
-                      blocks: s.blocks.map((b) =>
+                      blocks: s.blocks.map((b: any) =>
                         b.id === blockId
                           ? {
                               ...b,
-                              exercises: b.exercises.map((e) =>
+                              exercises: b.exercises.map((e: any) =>
                                 e.id === exerciseId ? { ...e, ...updates } : e,
                               ),
                             }
@@ -292,20 +292,20 @@ export const TemplateBuilderProvider: React.FC<{
   ) => {
     setTemplate((prev) => ({
       ...prev,
-      microcycles: prev.microcycles.map((m) =>
+      microcycles: prev.microcycles.map((m: any) =>
         m.id === microcycleId
           ? {
               ...m,
-              sessions: m.sessions.map((s) =>
+              sessions: m.sessions.map((s: any) =>
                 s.id === sessionId
                   ? {
                       ...s,
-                      blocks: s.blocks.map((b) =>
+                      blocks: s.blocks.map((b: any) =>
                         b.id === blockId
                           ? {
                               ...b,
                               exercises: b.exercises.filter(
-                                (e) => e.id !== exerciseId,
+                                (e: any) => e.id !== exerciseId,
                               ),
                             }
                           : b,

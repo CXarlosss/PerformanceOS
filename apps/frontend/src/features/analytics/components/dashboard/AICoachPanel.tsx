@@ -1,12 +1,6 @@
 import React from "react";
-import {
-  AlertCircle,
-  TrendingUp,
-  Zap,
-  ChevronRight,
-  Check,
-} from "lucide-react";
-import { useMarkInsightRead } from "../../training/hooks/useTrainingData";
+import { AlertCircle, TrendingUp, Zap, Check } from "lucide-react";
+import { useMarkInsightRead } from "../../../training/hooks/useTrainingData";
 
 interface Insight {
   id: string;
@@ -124,7 +118,7 @@ export const AICoachPanel: React.FC<AICoachPanelProps> = ({ insights }) => {
         <Zap size={20} fill="var(--primary)" stroke="var(--primary)" /> AI Coach
         Insights
       </h2>
-      {insights.map((insight) => {
+      {insights.map((insight: Insight) => {
         const config = severityConfig[insight.severity] || severityConfig.LOW;
         return (
           <div
