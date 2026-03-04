@@ -66,7 +66,7 @@ export const TemplateBuilderProvider: React.FC<{
       {
         id: nanoid(),
         name: "Semana 1",
-        order: 1,
+        weekNumber: 1,
         sessions: [],
       },
     ],
@@ -88,7 +88,7 @@ export const TemplateBuilderProvider: React.FC<{
         {
           id: nanoid(),
           name: `Semana ${prev.microcycles.length + 1}`,
-          order: prev.microcycles.length + 1,
+          weekNumber: prev.microcycles.length + 1,
           sessions: [],
         },
       ],

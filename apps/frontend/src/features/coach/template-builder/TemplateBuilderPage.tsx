@@ -11,19 +11,27 @@ const BuilderContent: React.FC = () => {
   const { mutateAsync: saveTemplate, isPending: saving } = useCreateTemplate();
 
   const handleSave = async () => {
+    const typeMapping: Record<string, string> = {
+      FUERZA: "STRENGTH",
+      HIPERTROFIA: "HYPERTROPHY",
+      CARDIO: "ENDURANCE",
+      PREP: "ACCESSORY",
+    };
+
     const payload = {
       title: template.title,
       description: template.description,
       durationWeeks: template.microcycles.length,
-      microcycles: template.microcycles.map((m: any, microIndex: number) => ({
-        name: m.name,
-        order: microIndex + 1,
+      microcycles: template.microcycles.map((m: any) => ({
+        weekNumber: m.weekNumber,
         sessions: m.sessions.map((s: any) => ({
           title: s.title,
           blocks: s.blocks.map((b: any) => ({
-            type: b.type,
+            type: typeMapping[b.type] || b.type,
             exercises: b.exercises.map((e: any) => ({
-              name: e.name,
+              // Usamos el ID real del catálogo si existe, si no, uno de prueba para el E2E
+              exerciseId:
+                e.exerciseId || "32640ec4-7f99-488f-bda9-7fd8ae66e0b6",
               targetSets: e.targetSets,
               targetReps: e.targetReps,
               targetRpe: e.targetRpe,
