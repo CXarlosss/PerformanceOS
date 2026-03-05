@@ -11,8 +11,10 @@ import { UpdateAssignedExerciseDto } from "../dto/update-assigned-exercise.dto";
 export class ProgramsService {
   constructor(private prisma: PrismaService) {}
 
-  async assign(dto: AssignProgramDto) {
-    const template = await this.prisma.programTemplate.findUnique({
+  async assign(dto: AssignProgramDto, tx?: any) {
+    const client = tx || this.prisma;
+
+    const template = await client.programTemplate.findUnique({
       where: { id: dto.templateId },
       include: {
         microcycles: {
@@ -35,7 +37,7 @@ export class ProgramsService {
       throw new NotFoundException("Template not found");
     }
 
-    const assignedProgram = await this.prisma.assignedProgram.create({
+    const assignedProgram = await client.assignedProgram.create({
       data: {
         templateId: template.id,
         athleteId: dto.athleteId,
@@ -45,7 +47,7 @@ export class ProgramsService {
     });
 
     for (const micro of template.microcycles) {
-      const assignedMicro = await this.prisma.assignedMicrocycle.create({
+      const assignedMicro = await client.assignedMicrocycle.create({
         data: {
           assignedProgramId: assignedProgram.id,
           weekNumber: micro.weekNumber,
@@ -54,7 +56,7 @@ export class ProgramsService {
       });
 
       for (const session of micro.sessions) {
-        const assignedSession = await this.prisma.assignedSession.create({
+        const assignedSession = await client.assignedSession.create({
           data: {
             microcycleId: assignedMicro.id,
             dayNumber: session.dayNumber,
@@ -64,7 +66,7 @@ export class ProgramsService {
         });
 
         for (const block of session.blocks) {
-          const assignedBlock = await this.prisma.assignedBlock.create({
+          const assignedBlock = await client.assignedBlock.create({
             data: {
               sessionId: assignedSession.id,
               type: block.type,
@@ -73,7 +75,7 @@ export class ProgramsService {
           });
 
           for (const ex of block.exercises) {
-            await this.prisma.assignedExercise.create({
+            await client.assignedExercise.create({
               data: {
                 blockId: assignedBlock.id,
                 exerciseId: ex.exerciseId,

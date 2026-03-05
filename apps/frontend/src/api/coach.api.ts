@@ -24,6 +24,10 @@ export const athletesApi = {
     const { data } = await apiClient.get(`athletes/${id}`);
     return data;
   },
+  onboard: async (payload: any) => {
+    const { data } = await apiClient.post("athletes/onboard", payload);
+    return data;
+  },
 };
 
 export const coachProgramsApi = {

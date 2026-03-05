@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuthStore } from "../../../store/useAuthStore";
 import { useCoachDashboard } from "../../training/hooks/useTrainingData";
 import {
@@ -7,11 +7,14 @@ import {
   TrendingUp,
   ChevronRight,
   User,
+  Plus,
 } from "lucide-react";
+import { AthleteOnboardingModal } from "../components/AthleteOnboardingModal";
 
 export const CoachDashboard: React.FC = () => {
   const { user } = useAuthStore();
   const { data: roster, isLoading } = useCoachDashboard(user?.id);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (isLoading) {
     return (
@@ -177,9 +180,29 @@ export const CoachDashboard: React.FC = () => {
               Ordenado por nivel de riesgo de lesión (ACWR)
             </p>
           </div>
-          <button className="btn-text" style={{ fontSize: "12px" }}>
-            Exportar Reporte
-          </button>
+          <div style={{ display: "flex", gap: "12px" }}>
+            <button className="btn-text" style={{ fontSize: "12px" }}>
+              Exportar Reporte
+            </button>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              style={{
+                background: "#0f172a",
+                color: "white",
+                border: "none",
+                padding: "8px 16px",
+                borderRadius: "10px",
+                fontSize: "12px",
+                fontWeight: "900",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
+              <Plus size={14} /> Crear Atleta
+            </button>
+          </div>
         </div>
 
         <div style={{ overflowX: "auto" }}>
@@ -448,6 +471,10 @@ export const CoachDashboard: React.FC = () => {
           </table>
         </div>
       </section>
+      <AthleteOnboardingModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };
