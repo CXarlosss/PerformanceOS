@@ -1,5 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { templatesApi, athletesApi, coachProgramsApi } from "../api/coach.api";
+import {
+  templatesApi,
+  athletesApi,
+  coachProgramsApi,
+} from "../../../api/coach.api";
 
 export const useTemplates = () => {
   return useQuery({
