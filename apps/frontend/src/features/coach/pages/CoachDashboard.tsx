@@ -339,16 +339,38 @@ export const CoachDashboard: React.FC = () => {
                         >
                           {athlete.name}
                         </p>
-                        <p
+                        <div
                           style={{
-                            margin: 0,
-                            fontSize: "11px",
-                            color: "#64748b",
-                            fontWeight: "bold",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "8px",
                           }}
                         >
-                          {athlete.level}
-                        </p>
+                          <p
+                            style={{
+                              margin: 0,
+                              fontSize: "11px",
+                              color: "#64748b",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            {athlete.level}
+                          </p>
+                          {athlete.status === "PENDING_INVITE" && (
+                            <span
+                              style={{
+                                fontSize: "9px",
+                                background: "#fef3c7",
+                                color: "#d97706",
+                                padding: "2px 6px",
+                                borderRadius: "4px",
+                                fontWeight: "900",
+                              }}
+                            >
+                              PENDING
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </td>

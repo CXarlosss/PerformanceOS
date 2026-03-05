@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from "@nestjs/common";
 import { PrismaService } from "../../../prisma/prisma.service";
 import { CreateAthleteDto } from "../dto/create-athlete.dto";
 import { CreateAthleteOnboardingDto } from "../dto/create-athlete-onboarding.dto";
@@ -13,6 +17,14 @@ export class AthletesService {
   ) {}
 
   async onboard(dto: CreateAthleteOnboardingDto, coachId: string) {
+    const existingUser = await this.prisma.user.findUnique({
+      where: { email: dto.email },
+    });
+
+    if (existingUser) {
+      throw new ConflictException("Este email ya está registrado");
+    }
+
     const hashedPassword = await bcrypt.hash(dto.password, 10);
 
     return this.prisma.$transaction(async (tx) => {

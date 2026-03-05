@@ -11,17 +11,17 @@ import { AthleteLevel } from "@prisma/client";
 
 export class CreateAthleteOnboardingDto {
   @IsString()
-  name: string;
+  name!: string;
 
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsString()
   @MinLength(6)
-  password: string;
+  password!: string;
 
   @IsEnum(AthleteLevel)
-  level: AthleteLevel;
+  level!: AthleteLevel;
 
   @IsOptional()
   @IsUUID()

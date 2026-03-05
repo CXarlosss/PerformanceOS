@@ -46,6 +46,12 @@ enum AthleteLevel {
   ADVANCED
 }
 
+enum AthleteStatus {
+  PENDING_INVITE
+  ACTIVE
+  ARCHIVED
+}
+
 enum BlockType {
   STRENGTH
   HYPERTROPHY
@@ -85,6 +91,7 @@ model AthleteProfile {
 
   name      String
   level     AthleteLevel
+  status    AthleteStatus @default(PENDING_INVITE)
   coachId   String?
 
   createdAt DateTime @default(now())
