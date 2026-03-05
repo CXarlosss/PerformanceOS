@@ -22,7 +22,7 @@ export class TemplatesController {
   @Post()
   @Roles(Role.ADMIN)
   async create(@Body() dto: CreateTemplateDto, @Request() req: any) {
-    return this.templatesService.create(dto, req.user.userId);
+    return this.templatesService.create(dto, req.user.id);
   }
 
   @Get()

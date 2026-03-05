@@ -23,7 +23,7 @@ export class AthletesController {
   @Roles(Role.ADMIN)
   async create(@Body() dto: CreateAthleteDto, @Req() req: any) {
     // El coachId es el ID del usuario autenticado (el coach)
-    const coachId = req.user.userId;
+    const coachId = req.user.id;
     return this.athletesService.create(dto, coachId);
   }
 

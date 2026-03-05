@@ -23,7 +23,7 @@ export class ProgramsController {
 
   @Get("current")
   async getCurrent(@Request() req: any) {
-    return this.programsService.getCurrentProgram(req.user.userId);
+    return this.programsService.getCurrentProgram(req.user.id);
   }
 
   @Post("assign")
@@ -39,10 +39,6 @@ export class ProgramsController {
     @Body() dto: UpdateAssignedExerciseDto,
     @Request() req: any,
   ) {
-    return this.programsService.updateAssignedExercise(
-      id,
-      dto,
-      req.user.userId,
-    );
+    return this.programsService.updateAssignedExercise(id, dto, req.user.id);
   }
 }
